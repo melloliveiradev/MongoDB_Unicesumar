@@ -1,0 +1,45 @@
+Exercício 1 - FIND Básico - Filtro por Tipo (0,5)
+# FIND POKEMONS DO TIPO FOGO
+db.pokemon.find(
+  {
+    types: "Fire",
+    attack: {
+      $gt: 80
+    }
+  },
+  {
+    _id: 0,
+    name: 1,
+    types: 1,
+    attack: 1
+  }
+).sort({attack: -1})
+
+# AGGREGATE FILTRAR POKEMONS DO TIPO FOGO
+db.pokemon.aggregate([
+  {
+    $match: {types: "Fire", attack: {$gt: 80}}
+  },
+  {
+    $sort: {attack: -1}
+  },
+  {
+    $project: {_id: 0, name: 1, types: 1, attack: 1}
+  }
+])
+
+# AGGREGATE FILTRAR POKEMONS PUROS DO TIPO FOGO
+db.pokemon.aggregate([
+  {
+    $unwind: "$types"
+  },
+  {
+    $match: {types: "Fire", attack: {$gt: 80}}
+  },
+  {
+    $sort: {attack: -1}
+  },
+  {
+    $project: {_id: 0, name: 1, types: 1, attack: 1}
+  }
+])
