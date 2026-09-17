@@ -1,0 +1,18 @@
+# Exercício 4 - FIND $all - Lembra Q5? (0,6)
+
+# FIND POKEMON COM NO MINIMO ESSES 2 TIPOS ESPECÍFICOS
+db.pokemon.find(
+  {
+    types: {
+      $all: [
+        "Fire",
+        "Flying"
+      ]
+    }
+  },
+  {
+    _id: 0,
+    name: 1,
+    types: 1
+  }
+)
