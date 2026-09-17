@@ -1,0 +1,32 @@
+# Exercício 3 - FIND Array $size (0,6)
+# FIND EM POKEMONS COM 2 TIPOS, PRIMEIRA GERAÇÃO
+db.pokemon.find(
+  {
+    types: {
+      $size: 2
+    },
+    generation: 1
+  },
+  {
+    _id: 0,
+    name: 1,
+    types: 1,
+    generation: 1
+  }
+)
+
+# FIND EM POKEMONS COM 2 TIPOS ESPECÍFICOS (GRASS E POISON), PRIMEIRA GERAÇÃO
+db.pokemon.find(
+  {
+    types: {
+      $all: ["Grass", "Poison"]
+    },
+    generation: 1
+  },
+  {
+    _id: 0,
+    name: 1,
+    types: 1,
+    generation: 1
+  }
+)
