@@ -1,0 +1,44 @@
+# Exercício 2 - FIND com $in e $regex (0,5)
+# FIND, REGEX e OR
+db.pokemon.find(
+  {
+    name: {
+      $regex: "^Char",
+      $options: "i"
+    },
+    $or: [
+      {
+        types: "Fire"
+      },
+      {
+        types: "Dragon"
+      }
+    ]
+  },
+  {
+    _id: 0,
+    name: 1,
+    types: 1
+  }
+)
+
+# FIND, REGEX e IN
+db.pokemon.find(
+  {
+    name: {
+      $regex: "^Char",
+      $options: "i"
+    },
+    types: {
+      $in: [
+        "Fire",
+        "Dragon"
+      ]
+    }
+  },
+  {
+    _id: 0,
+    name: 1,
+    types: 1
+  }
+)
